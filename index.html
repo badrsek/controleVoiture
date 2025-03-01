@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contrôle de la voiture</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .controls {
+            display: grid;
+            grid-template-areas: 
+                ". forward ."
+                "left stop right"
+                ". backward .";
+            gap: 10px;
+            width: 200px;
+            margin: 0 auto;
+        }
+        button {
+            padding: 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 10px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        button:active {
+            background-color: #004085;
+            transform: scale(0.95);
+        }
+        #forward { grid-area: forward; }
+        #backward { grid-area: backward; }
+        #left { grid-area: left; }
+        #right { grid-area: right; }
+        #stop { 
+            grid-area: stop; 
+            background-color: #dc3545; 
+        }
+        #stop:hover { background-color: #c82333; }
+        #stop:active { background-color: #bd2130; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Contrôle de la voiture</h1>
+        <div class="controls">
+            <button id="forward" onclick="fetch('/forward')">↑</button>
+            <button id="left" onclick="fetch('/left')">←</button>
+            <button id="stop" onclick="fetch('/stop')">■</button>
+            <button id="right" onclick="fetch('/right')">→</button>
+            <button id="backward" onclick="fetch('/backward')">↓</button>
+        </div>
+    </div>
+</body>
+</html>
