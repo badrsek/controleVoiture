@@ -69,12 +69,33 @@
     <div class="container">
         <h1>Contrôle de la voiture</h1>
         <div class="controls">
-            <button id="forward" onclick="fetch('/forward')">↑</button>
-            <button id="left" onclick="fetch('/left')">←</button>
-            <button id="stop" onclick="fetch('/stop')">■</button>
-            <button id="right" onclick="fetch('/right')">→</button>
-            <button id="backward" onclick="fetch('/backward')">↓</button>
+            <button id="forward" onclick="sendCommand('forward')">↑</button>
+            <button id="left" onclick="sendCommand('left')">←</button>
+            <button id="stop" onclick="sendCommand('stop')">■</button>
+            <button id="right" onclick="sendCommand('right')">→</button>
+            <button id="backward" onclick="sendCommand('backward')">↓</button>
         </div>
     </div>
+    <script>
+        const ADAFRUIT_IO_KEY = "VOTRE_CLE_API_ADAFRUIT_IO"; // Remplacez par votre clé
+        const ADAFRUIT_IO_USERNAME = "VOTRE_USERNAME_ADAFRUIT"; // Remplacez par votre nom d'utilisateur
+        const FEED_NAME = "car-commands";
+
+        async function sendCommand(command) {
+            const url = `https://io.adafruit.com/api/v2/${ADAFRUIT_IO_USERNAME}/feeds/${FEED_NAME}/data`;
+            const headers = {
+                "X-AIO-Key": ADAFRUIT_IO_KEY,
+                "Content-Type": "application/json"
+            };
+            const body = JSON.stringify({ value: command });
+
+            try {
+                await fetch(url, { method: "POST", headers: headers, body: body });
+                console.log(`Commande envoyée : ${command}`);
+            } catch (error) {
+                console.error("Erreur :", error);
+            }
+        }
+    </script>
 </body>
 </html>
